@@ -1,4 +1,3 @@
-from executed_sorted_by_date import get_sorted_executed
 from datetime import datetime
 
 
@@ -9,11 +8,11 @@ def to_hidden_view(s):
     return s[:4] + " " + s[4:6] + "** ****" + s[-4:]
 
 
-def last_executed():
+def last_executed(executed_op):
     """выводит 5 последних выполненых операций"""
-    executed_op = get_sorted_executed()
     for i in range(5):
-        print(datetime.strftime(datetime.strptime(executed_op[i]['date'][:executed_op[i]['date'].index("T")], '%Y-%m-%d').date(), '%d.%m.%Y'), end=" ")
+        print(datetime.strftime(datetime.strptime(executed_op[i]['date'][:executed_op[i]['date'].index("T")],
+                                                  '%Y-%m-%d').date(), '%d.%m.%Y'), end=" ")
         print(executed_op[i]['description'])
         to = executed_op[i]['to'].split()
         if executed_op[i]['description'] == "Открытие вклада":
@@ -31,6 +30,3 @@ def last_executed():
         print(executed_op[i]['operationAmount']['amount'], end=" ")
         print(executed_op[i]['operationAmount']['currency']['name'])
         print()
-
-
-last_executed()
